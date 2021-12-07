@@ -40,3 +40,35 @@
         + [ISC BIND9 – 最詳細、最認真的從零開始的BIND 9 服務講解](https://codingnote.cc/zh-tw/p/334131/)
         + [Ubuntu 使用 bind9 架設DNS Server](https://eric0806.blogspot.com/2014/06/ubuntu-bind9-dns-server.html)
         + [bind9自建DNS解析服務](https://ithelp.ithome.com.tw/articles/10255408)
+
+## 議題
+
+#### DNS CAA
+
+憑證頒發機構授權 (Certificate Authority Authorization, CAA) 是一種 DNS 紀錄，它讓網站管理者指定哪些憑證頒發機構，可以頒發包含其網站域名的憑證。CAA 記錄在 2013 年由 RFC 6844 標準化，以"降低網域擁有者對於 CA 意外頒發憑證時的風險"。
+
+由於域名設定完成後，任何 CA 都可以在驗證域名控制權後，替任何 DNS 下的網域頒發憑證。這表示，如果在 CA 的驗證程序中有錯誤，所有域名都可能受到影響。CAA 紀錄提供了一個方法讓域名擁有者降低這種風險。
+
+然而，在實務上，會因為申請域名的服務商預設了 DNS CAA 導致無法從其它服務商接受憑證，在此情況有以下處理方式：
+
++ 修改 DNS CAA 記錄
+    - 關閉 DNS CAA 設定，另域名可接受任何 CA 廠商的憑證
+    - 增加 DNS CAA 設定 ( 注意此設定是否為額外付費項目 )
++ 配合域名服務商申請 SSL
+    - 機於域名安全設定，多數的域名提供商會有提供 SSL 憑證發行協助
+    - 基於此項原則會導致域名申請與 SSL 發行為同服務商，相關服務費用應一併考量
+
+相關文獻：
+
++ [憑證頒發機構授權 let's encrypt](https://letsencrypt.org/zh-tw/docs/caa/)
++ [DNS CAA 資源記錄檢查](https://docs.digicert.com/zh-tw/manage-certificates/dns-caa-resource-record-check/)
++ [AWS Certificate Manager 設定 CAA 記錄](https://docs.aws.amazon.com/zh_tw/acm/latest/userguide/setup-caa.html)
++ [Gandi CAA 記錄](https://docs.gandi.net/zh-hant/domain_names/faq/record_types/caa_record.html)
++ [正確設置DNS CAA記錄，提升HTTPS站點安全](https://kknews.cc/zh-tw/news/xvbpryr.html)
+
+檢查工具：
+
++ [CAA Record Helper](https://sslmate.com/caa/)
+    - [超快速 DNS CAA 設定 Step by Step](https://cjk.aiao.today/dns-caa-setting-step-by-step/)
+    - [設定 DNS CAA 紀錄，保護自己的 SSL/TLS 憑證](https://ezbox.idv.tw/112/dns-caa-protec-ssl-tls-certificate/)
++ [View Which CA's Are Entitled to Issue Certificates For Your Domain(s)](https://www.entrust.com/resources/certificate-solutions/tools/caa-lookup)
