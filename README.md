@@ -3,6 +3,10 @@
 ## 實驗
 
 1. 建構 DHCP 伺服器
+    + 建置一個虛擬網路
+    + 建置一個 DHCP Server 主機於虛擬網路內
+    + 建置一個 DHCP Client 主機於虛擬網路內
+    + 由 DHCP Client 主機發送請求網路設定，並由 DHCP Server 回應
 2. 建構 DNS 伺服器
 3. 提供 Client 主機的 IP 位置與 DNS 設定
 4. 使用 Client 主機透過域名查詢到指定的 IP 位置
@@ -26,6 +30,8 @@
             - [如何在Ubuntu上設置DHCP服務器](https://ubuntuqa.com/zh-tw/article/10932.html)
             - [How to Install a DHCP Server in Ubuntu and Debian](https://www.tecmint.com/install-dhcp-server-in-ubuntu-debian/)
             - [Setting up a Docker container as a DHCP server](https://gist.github.com/mikejoh/04978da4d52447ead7bdd045e878587d)
+            - [isc-dhcp-server community help wiki](https://help.ubuntu.com/community/isc-dhcp-server)
+            - [How to Install and Configure DHCP Server on Ubuntu 18.04 LTS](https://linuxhint.com/install_dhcp_server_ubuntu/)
         + [DHCP Client](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-sy/dhcp-15-sy-book/config-dhcp-client.pdf)
             - [DHCP Client運作方式](https://blog.dabinn.net/dhcp-client%E9%81%8B%E4%BD%9C%E6%96%B9%E5%BC%8F/)
 + DNS
@@ -40,6 +46,12 @@
         + [ISC BIND9 – 最詳細、最認真的從零開始的BIND 9 服務講解](https://codingnote.cc/zh-tw/p/334131/)
         + [Ubuntu 使用 bind9 架設DNS Server](https://eric0806.blogspot.com/2014/06/ubuntu-bind9-dns-server.html)
         + [bind9自建DNS解析服務](https://ithelp.ithome.com.tw/articles/10255408)
+
++ 技術文獻
+    - Virtual Machine
+        + [How To Configure Networking In Vagrant](https://www.linuxhowto.net/how-to-configure-networking-in-vagrant/)
+        + [How to emulate a network using VirtualBox](https://www.brianlinkletter.com/2016/07/how-to-use-virtualbox-to-emulate-a-network/)
+        + [Vagrant virtualbox networking document](https://www.vagrantup.com/docs/providers/virtualbox/networking)
 
 ## 議題
 
