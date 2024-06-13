@@ -1,0 +1,14 @@
+; autoconfiguredns
+$TTL 86400
+@     IN      SOA     ns1.demodns.org.     root.ns1.demodns.org. (
+                      2           ; serial
+                      21600       ; refresh after 6 hours
+                      3600        ; retry after 1 hour
+                      604800      ; expire after 1 week
+                      86400 )     ; minimum TTL of 1 day
+;
+@     IN      NS      ns1.demodns.org.
+;
+ns1   IN      A       10.0.2.15
+www   IN      A       10.0.2.16
+web   IN      A       192.168.0.100
