@@ -11,6 +11,63 @@
 3. 提供 Client 主機的 IP 位置與 DNS 設定
 4. 使用 Client 主機透過域名查詢到指定的 IP 位置
 
+### DHCP 驗證與說明
+
+範本程式在 [dhcp/vm](./dhcp/vm) 目錄下執行：
+
+```
+# 啟動 DHCP 服務主機
+cd m1
+vagrant up
+# 啟動使用 DHCP 的虛擬機
+cd m2
+vagrant up
+cd m3
+vagrant up
+```
+
+參考文獻說明，DHCP ( Dynamic Host Configuration Protocol ) 服務是一種分配 IP 的區域網路服務，當區域網路中存在一個 DHCP 主機，當同區域網路的主機對網域請求 IP 廣播後，會回應 IP 資訊給請求主機並自行填入分配的 IP。
+
+### DNS 驗證與說明
+
+範本程式在 [dns](./dns) 目錄下，分為 VM 與 Docker 執行：
+
++ [Virtual Machine](./dns/vm)
+```
+# 啟動並進入虛擬機
+cd dns/vm
+vagrant up
+vagrant ssh
+# 執行 DNS 服務，以下指令在虛擬機中執行
+cd /app
+sudo bash bind9.sh
+```
+
++ [Docker](./dns/docker)
+```
+cd dns/docker
+dev.bat
+```
+
+參考文獻說明，DNS ( Domain Name System ) 服務是網際網路中用來將域名 ( 例如：www.demodns.org ) 轉換成網址 ( 例如：192.168.0.50 ) 的服務系統；本範例使用的 DNS 系統為 BIND9，會依據設定的數據正解 ( 域名解析成網址 ) 或反解 ( 網址解析成域名 )。
+
+需要注意的是，範例中每個正解、反解設定的 SOA、NS 是相同的，此外 NS 設定為 DNS 解析伺服器域名，這些域名必需有對應的 A 設定 ( 原則上就是本機的 IP )，其服務才會正常運作；其文件結構如下：
+```
+@ IN SOA ns.xxx.org. ... ( ... )
+@ IN NS ns.xxx.org.
+ns IN A x.x.x.x
+```
+
+此外，倘若 DNS 未設定給本機的域名主機位置清單或前述的 NS 解析的網址並非本機，在測試時需額外域名主機位置 ( 若為本機可使用 localhost )；例如以下檢測項目：
+```
+nslookup ns.demodns.org localhost
+nslookup www.demodns.org localhost
+nslookup web.demodns.org localhost
+nslookup 192.168.0.1 localhost
+nslookup 192.168.0.50 localhost
+nslookup 192.168.0.100 localhost
+```
+
 ## 文獻
 
 + Wiki
@@ -37,8 +94,11 @@
 + DNS
     - 函式庫
         + [BIND 9](https://www.isc.org/bind/)
-        + [Docker BIND 9 By Internet Systems Consortium](https://hub.docker.com/_/bind9/plans/3af94cc6-b9c6-43c2-8658-e617ef977949?tab=instructions)
+        + [ubuntu/bind9 - Docker](https://hub.docker.com/r/ubuntu/bind9)
+        + [autoconfiguredns - Github](https://github.com/javiervidrua/autoconfiguredns)
     - 教學
+        + [領域名稱伺服器 (DNS) - 鳥哥](https://dic.vbird.tw/linux_server/unit09.php)
+        + [How to Setup and configure Bind as a Private Network DNS Server](https://www.webhi.com/how-to/how-to-setup-and-configure-bind-as-a-private-network-dns-server/)
         + [CSICO Local DNS Forwarding](https://docs.umbrella.com/deployment-umbrella/docs/6-local-dns-forwarding)
         + [Forward DNS Queries for Certain Domains to a Private DNS Server](https://www.draytek.com/support/knowledge-base/5264)
         + [How to Run Your Own DNS Server on Your Local Network](https://www.cloudsavvyit.com/14816/how-to-run-your-own-dns-server-on-your-local-network/)
