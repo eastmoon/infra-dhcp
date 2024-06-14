@@ -19,3 +19,12 @@ docker run -d ^
     -v %cd%\bind\zone.d:/etc/bind/zone.d ^
     --name bind9 ^
     ubuntu/bind9
+
+timeout /t 3
+
+nslookup ns.demodns.org localhost
+nslookup www.demodns.org localhost
+nslookup web.demodns.org localhost
+nslookup 192.168.0.1 localhost
+nslookup 192.168.0.50 localhost
+nslookup 192.168.0.100 localhost
